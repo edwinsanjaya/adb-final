@@ -41,5 +41,19 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ success: false }))
 })
 
+router.put('/:id', (req, res) => {
+  Actor.findByPk(req.params.id)
+    .then(actor => {
+      if (!actor) {
+        throw "actor not exist"
+      }
+      return actor
+    }).then(actor => actor.update({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    })).then(() => res.json({ success: true}))
+    .catch(err => res.status(404).json({ success: false}))
+})
+
 
 module.exports = router;
