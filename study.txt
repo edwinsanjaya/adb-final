@@ -1,0 +1,54 @@
+//Express Router Test
+
+var router = express.Router();
+router.get('/', function(req, res){
+  res.json({message: 'Berhasil cuk!'});
+});
+app.use('/api', router)
+
+
+//Setup React in client folder
+
+- npx create-react-app . in client
+- add following with host in package.json "proxy": "http://localhost:5000"
+
+//Concurrently: run FE & BE at the same time
+
+In package.json of project:
+"client": "npm start --prefix client",
+"dev": "concurrently \"npm run server \" \"npm run client\""
+npm run dev
+
+//React Setup
+
+Install in client
+npm i bootstrap reactstrap uuid react-transition-group
+import 'bootstrap/dist/css/bootstrap.min.css' in App.js
+strict mode temporarily disabled, enable before deployment to avoid critical issue
+
+//Redux
+
+Install in client
+npm i redux react-redux redux-thunk
+Entry point: store.js
+Create reducers & actions
+Add Provider in App.js
+
+change export default in component:
+export default connect(mapStateToProps, { getActors })(ActorList);
+- mapStateToProps: get state and map them into component properties
+- prop types (need for get)
+
+add componentDidMount (especially for get)
+
+// Connect Backend
+
+- reducers: add loading state (for data fetching state from API), add loading type
+- install axios in client (npm i axios) & add to actions
+- add dispatch to function in actions (this where thunk comes in)
+
+// Deploy
+
+- Edit index/html (title, comments, etc.)
+- Edit server.js to automatically build (serve static asset)
+- Create heroku postbuild script in package.json of server
