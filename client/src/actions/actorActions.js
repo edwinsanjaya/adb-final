@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ACTORS, ADD_ACTOR, DELETE_ACTOR, LOADING_ACTOR } from "./types";
+import { GET_ACTORS, ADD_ACTOR, DELETE_ACTOR, LOADING_ACTOR, UPDATE_ACTOR } from "./types";
 
 export const getActors = () => dispatch => {
   // return {
@@ -50,4 +50,15 @@ export const setLoadingActor = () => {
   return {
     type: LOADING_ACTOR
   };
+}
+
+export const updateActor = (id, actor) => dispatch => {
+  axios
+    .put(`/api/actors/${id}`, {
+      firstName: actor.firstName,
+      lastName: actor.lastName
+    }).then(res => dispatch({
+      type: UPDATE_ACTOR,
+      payload: res.data.actor
+    }))
 }

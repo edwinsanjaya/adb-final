@@ -51,8 +51,12 @@ router.put('/:id', (req, res) => {
     }).then(actor => actor.update({
       firstName: req.body.firstName,
       lastName: req.body.lastName
-    })).then(() => res.json({ success: true}))
-    .catch(err => res.status(404).json({ success: false}))
+    })).then(actor => res.json({
+      success: true,
+      actor: actor,
+      status: res.statusCode
+    }))
+    .catch(err => res.status(404).json({ success: false }))
 })
 
 
