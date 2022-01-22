@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { connect } from 'react-redux'
-import { getActors, addActor, deleteActor } from '../actions/actorActions'
+import { getActors, addActor, deleteActor, toggleModal } from '../actions/actorActions'
 import PropTypes from 'prop-types'
 
 class ActorList extends Component {
@@ -13,6 +13,7 @@ class ActorList extends Component {
     }
     this.deleteActor = this.deleteActor.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClickUpdateModal = this.handleClickUpdateModal.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,14 @@ class ActorList extends Component {
 
     this.setState({
       [name]: value
+    });
+  }
+
+  handleClickUpdateModal(actorId, firstName, lastName) {
+    this.props.toggleModal({
+      actorId,
+      firstName,
+      lastName
     });
   }
 
@@ -49,6 +58,13 @@ class ActorList extends Component {
                   >
                     &times;
                   </Button>
+                  <Button
+                    className="update-btn"
+                    color="info"
+                    size="sm"
+                    onClick={this.handleClickUpdateModal.bind(this, actor_id, firstName, lastName)}>
+                      Update
+                  </Button>
                   {actor_id} {firstName} {lastName}
                 </ListGroupItem>
               </CSSTransition>
@@ -71,4 +87,4 @@ const mapStateToProps = (state) => ({
   actor: state.actor
 });
 
-export default connect(mapStateToProps, { getActors, addActor, deleteActor })(ActorList);
+export default connect(mapStateToProps, { getActors, addActor, deleteActor, toggleModal })(ActorList);
