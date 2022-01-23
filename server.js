@@ -7,11 +7,12 @@ const actors = require('./routes/api/actors')
 const app = express();
 app.use(bodyParser.json())
 
-//Routes
+// Routes
 app.use('/api/actors', actors)
 
-//Serve static assets if in production
+// Serve static assets if in production
 if(process.env.NODE_ENV === 'production'){
+  // Set static folder (load index.html in here)
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
