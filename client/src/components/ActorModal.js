@@ -10,28 +10,39 @@ import {
   Input
 } from 'reactstrap'
 import { connect } from 'react-redux';
-import { addActor } from '../actions/actorActions'
+import { addActor, toggleModal, updateActor } from '../actions/actorActions'
 
 class ActorModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
-      firstName: '',
-      lastName: '',
+      firstName: props.actor.modal.firstName,
+      lastName: props.actor.modal.lastName,
+      open: props.actor.modal.open
     }
     this.toggleModal = this.toggleModal.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addActor = this.addActor.bind(this)
+    this.updateActor = this.updateActor.bind(this)
   }
 
   toggleModal() {
-    this.setState({
-      modal: !this.state.modal,
+    this.props.toggleModal({
+      actorId: null,
       firstName: '',
-      lastName: '',
+      lastName: ''
     })
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.actor.modal.open !== state.open) {
+      return {
+        firstName: props.actor.modal.firstName,
+        lastName: props.actor.modal.lastName,
+        open: props.actor.modal.open
+      }
+    }
   }
 
   handleChange(event) {
@@ -47,15 +58,32 @@ class ActorModal extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const actor = {
+      actorId: this.props.actor.actorId,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
     }
-    this.addActor(actor)
+    if (!actor.actorId) {
+      this.addActor(actor)
+    } else {
+      this.updateActor(actor)
+    }
     this.toggleModal()
   }
 
   addActor(actor) {
     this.props.addActor(actor)
+  }
+
+  updateActor(actor) {
+    this.props.updateActor(actor)
+  }
+
+  generateActionText() {
+    if (!!this.props.actor.actorId) {
+      return 'Update Actor'
+    } else {
+      return 'Add Actor'
+    }
   }
 
   render() {
@@ -69,10 +97,10 @@ class ActorModal extends Component {
           Add Item
         </Button>
         <Modal
-          isOpen={this.state.modal}
+          isOpen={!!this.props.actor.modal.open}
           toggle={this.toggleModal}
         >
-          <ModalHeader toggle={this.toggleModal}>Add Actor</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>{this.generateActionText()}</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleSubmit} inline>
               <FormGroup floating>
@@ -81,6 +109,7 @@ class ActorModal extends Component {
                   name="firstName"
                   id="firstName"
                   placeholder="Add your first name..."
+                  value={this.state.firstName}
                   onChange={this.handleChange}
                 >
                 </Input>
@@ -93,6 +122,7 @@ class ActorModal extends Component {
                   name="lastName"
                   id="lastName"
                   placeholder="Add your last name..."
+                  value={this.state.lastName}
                   onChange={this.handleChange}
                 >
                 </Input>
@@ -100,7 +130,7 @@ class ActorModal extends Component {
               </FormGroup>
               {' '}
               <Button>
-                Add Actor
+                {this.generateActionText()}
               </Button>
             </Form>
           </ModalBody>
@@ -115,4 +145,4 @@ const mapStateToProps = (state) => ({
   actor: state.actor
 });
 
-export default connect(mapStateToProps, { addActor })(ActorModal)
+export default connect(mapStateToProps, { addActor, toggleModal, updateActor })(ActorModal)
