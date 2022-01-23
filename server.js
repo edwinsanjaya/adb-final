@@ -1,17 +1,44 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path')
+const path = require('path');
+const session = require('express-session');
+const db = require('./config/database');
+const passport = require('passport');
 
-const actors = require('./routes/api/actors')
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const { isAuth } = require('./routes/middleware/authMiddleware');
+const actors = require('./routes/api/actors');
 
 const app = express();
-app.use(bodyParser.json())
+
+sessionStore = new SequelizeStore({
+  db: db
+});
+app.use(session({
+  secret: 'keyboard cat',
+  store: sessionStore,
+  resave: false,
+  proxy: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // equals 1 day
+  }
+}));
+
+sessionStore.sync();
+
+require('./config/passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(bodyParser.json());
 
 // Routes
 app.use('/api/actors', actors)
 
 // Serve static assets if in production
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
   // Set static folder (load index.html in here)
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
