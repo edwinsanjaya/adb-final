@@ -18,7 +18,10 @@ router.post('/', (req, res) => {
   }
   User.create(newUser)
     .then(user => res.json({ user: user }))
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 })
 
 module.exports = router

@@ -9,8 +9,8 @@ const customFields = {
 }
 
 const verifyCallback = (username, password, done) => {
-  User.findAll({
-    username: username
+  User.findOne({
+    where: { username: username }
   }).then((user) => {
     if (!user) return done(null, false)
 
@@ -29,7 +29,7 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.user_id);
 });
 
 passport.deserializeUser((userId, done) => {

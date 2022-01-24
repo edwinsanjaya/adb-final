@@ -32,6 +32,6 @@ const User = db.define('user', {
   updatedAt: 'lastUpdate'
 })
 
-User.sync({ force: true });
+User.sync({ force: false });
 
 module.exports = User
