@@ -15,10 +15,17 @@
   "author": "Edwin Sanjaya",
   "license": "MIT",
   "dependencies": {
+    "base64url": "^3.0.1",
     "body-parser": "^1.19.1",
     "concurrently": "^6.4.0",
+    "connect-session-sequelize": "^7.1.2",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^6.12.0-beta.2"
   },
   "devDependencies": {
