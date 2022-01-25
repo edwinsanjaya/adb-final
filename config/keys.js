@@ -12,5 +12,12 @@ module.exports = {
     password: 'yT=jw!5h1n{!q9X}K2si40cD',
     database: 'u130857331_testing',
     dialect: 'mysql',
-  }
+  },
+  production: {
+    user: 'u130857331_testing',
+    host: 'sql603.main-hosting.eu',
+    password: 'yT=jw!5h1n{!q9X}K2si40cD',
+    database: 'u130857331_testing',
+    dialect: 'mysql',
+  },
 }
