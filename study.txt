@@ -52,3 +52,6 @@ add componentDidMount (especially for get)
 - Edit index/html (title, comments, etc.)
 - Edit server.js to automatically build (serve static asset), hit public/index.html if client not hitting API path (/api/actors)
 - Create heroku postbuild script in package.json of server to autobuild frontend
+
+// TinyMCE
+npm install @tinymce/tinymce-react

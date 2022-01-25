@@ -43,6 +43,9 @@ class ActorModal extends Component {
         open: props.actor.modal.open
       }
     }
+    else {
+      return null
+    }
   }
 
   handleChange(event) {
