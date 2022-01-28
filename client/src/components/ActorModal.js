@@ -12,6 +12,12 @@ import {
 import { connect } from 'react-redux';
 import { addActor, toggleModal, updateActor } from '../actions/actorActions'
 
+function mapStateToProps(state){
+  return {
+    actor: state.actor
+  }
+}
+
 class ActorModal extends Component {
   constructor(props) {
     super(props)
@@ -143,9 +149,5 @@ class ActorModal extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  actor: state.actor
-});
 
 export default connect(mapStateToProps, { addActor, toggleModal, updateActor })(ActorModal)

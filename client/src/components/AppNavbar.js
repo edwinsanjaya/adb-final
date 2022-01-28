@@ -10,6 +10,13 @@ import {
   Container
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  }
+}
 
 class AppNavbar extends Component {
   constructor(props) {
@@ -27,8 +34,13 @@ class AppNavbar extends Component {
   }
 
   render() {
+    const isAuthenticated = this.props.auth.isAuthenticated
+    console.log(isAuthenticated)
     return (
       <div>
+        {
+          isAuthenticated && 'Logged in as ' + this.props.auth.user.username
+        }
         <Navbar color="dark" dark expand="sm" container>
           <NavbarBrand href="/">Jellyfish Gaming</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -50,7 +62,7 @@ class AppNavbar extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://edwinsanjaya.github.io/">
+                <NavLink href="https://www.google.com/search?q=edwin+%26+wilson">
                   Contact Us
                 </NavLink>
               </NavItem>
@@ -62,4 +74,6 @@ class AppNavbar extends Component {
   }
 }
 
-export default AppNavbar;
+export default connect(
+  mapStateToProps
+)(AppNavbar);

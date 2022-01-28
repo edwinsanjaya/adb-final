@@ -5,6 +5,13 @@ import { connect } from 'react-redux'
 import { getActors, addActor, deleteActor, toggleModal } from '../actions/actorActions'
 import PropTypes from 'prop-types'
 
+function mapStateToProps(state) {
+  //should be similar with reducer in reducers.index.js
+  return {
+    actor: state.actor
+  }
+}
+
 class ActorList extends Component {
   constructor(props) {
     super(props);
@@ -81,10 +88,5 @@ ActorList.propTypes = {
   getActors: PropTypes.func.isRequired,
   actor: PropTypes.object.isRequired
 }
-
-const mapStateToProps = (state) => ({
-  //should be similar with reducer in reducers.index.js
-  actor: state.actor
-});
 
 export default connect(mapStateToProps, { getActors, addActor, deleteActor, toggleModal })(ActorList);
