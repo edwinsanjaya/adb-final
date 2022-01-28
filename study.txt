@@ -36,8 +36,8 @@ Add Provider in App.js
 
 change export default in component:
 export default connect(mapStateToProps, { getActors })(ActorList);
-- mapStateToProps: get state and map them into component properties
-- prop types (need for get)
+- mapStateToProps: get state from store.js and map them into component properties
+- prop types (needed for get)
 
 add componentDidMount (especially for get)
 
