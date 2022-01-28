@@ -7,11 +7,11 @@ const passport = require('passport');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const { isAuth } = require('./routes/middleware/authMiddleware');
 const actors = require('./routes/api/actors');
 const users = require('./routes/api/users');
-const routeSession = require('./routes/api/session');
+const sessionRoute = require('./routes/api/session');
 const authentication = require('./routes/api/authentication');
+const articleRoute = require('./routes/api/articles');
 
 const app = express();
 
@@ -41,7 +41,10 @@ app.use(bodyParser.json());
 app.use('/api/actors', actors);
 app.use('/api/users', users);
 app.use('/api/authentication', authentication);
-app.use('/api/session', routeSession);
+app.use('/api/session', sessionRoute);
+app.use('/api/articles', articleRoute);
+
+require('./models/Article');
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
