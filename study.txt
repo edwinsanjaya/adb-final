@@ -56,5 +56,8 @@ add componentDidMount (especially for get)
 // TinyMCE
 npm install @tinymce/tinymce-react
 
-//Route
+// Route
 in react-router 6, element must use function component if you need params feature
+
+// React Auth
+trigger load user in App.js during render/mount -> call the load user function in componentDidMount()
