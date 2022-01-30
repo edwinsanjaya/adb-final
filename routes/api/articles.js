@@ -3,7 +3,8 @@ const router = express.Router();
 const Article = require('../../models/Article');
 const isAuth = require('../middleware/authMiddleware').isAuth;
 
-router.get('/:id', isAuth, (req, res) => {
+// router.get('/:id', isAuth, (req, res) => {
+router.get('/:id', (req, res) => {
   Article.findByPk(req.params.id)
     .then(article => res.json(article))
     .catch(err => {

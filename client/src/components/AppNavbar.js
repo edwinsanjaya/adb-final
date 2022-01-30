@@ -35,7 +35,6 @@ class AppNavbar extends Component {
 
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
-    console.log(isAuthenticated)
     return (
       <div>
         {

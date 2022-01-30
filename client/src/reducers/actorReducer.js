@@ -11,7 +11,7 @@ const initialState = {
 };
 
 //test
-export default function foo(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ACTORS:
       return {
@@ -41,7 +41,6 @@ export default function foo(state = initialState, action) {
         loading: true
       }
     case TOGGLE_MODAL:
-      console.log(state)
       return {
         ...state,
         modal: {
