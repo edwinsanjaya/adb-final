@@ -17,6 +17,21 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.post('/filter', (req, res, next) => {
+  const filter = {}
+  if (req.body?.firstName) {
+    filter.firstName = req.body.firstName
+  }
+  if (req.body?.lastName) {
+    filter.lastName = req.body.lastName
+  }
+  Actor.findAll({
+    where: { ...filter }
+  })
+    .then(actors => res.json(actors))
+    .catch(err => next(err))
+})
+
 // @route   POST api/actors
 // @desc    Create an actor
 // @access  Public
