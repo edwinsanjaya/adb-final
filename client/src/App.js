@@ -8,6 +8,7 @@ import ActorList from './components/ActorList';
 import ActorModal from './components/ActorModal';
 import TinyMceEditor from './components/TinyMceEditor';
 import ArticleDetailPage from './pages/ArticleDetailPage';
+import ArticleEditPage from './pages/ArticleEditPage';
 import LoginPage from './pages/LoginPage';
 import store from './store'
 import './App.css';
@@ -28,8 +29,9 @@ class App extends Component {
               <Routes>
                 <Route exact path="/" element={<><div>This is home page</div></>} />
                 <Route exact path="/actor-list" element={<><ActorModal /><ActorList /></>} />
-                <Route exact path="/article/edit" element={<TinyMceEditor />} />
+                <Route exact path="/article/create" element={<TinyMceEditor defaultViewer/>} />
                 <Route exact path="/article/:id" element={<ArticleDetailPage />} />
+                <Route exact path="/article/:id/edit" element={<ArticleEditPage />} />
                 <Route exact path="/ruangan-rahasia/login" element={<LoginPage />} />
               </Routes>
             </Container>

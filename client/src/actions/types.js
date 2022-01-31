@@ -20,3 +20,4 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const GET_ARTICLE = 'GET_ARTICLE';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const LOADING_ARTICLE = 'LOADING_ARTICLE';
+export const UPDATE_ARTICLE = 'UPDATE_ARTICLE'

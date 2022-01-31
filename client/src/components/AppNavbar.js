@@ -56,7 +56,7 @@ class AppNavbar extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/article/edit">
+                <NavLink tag={Link} to="/article/create">
                   Article Editor
                 </NavLink>
               </NavItem>

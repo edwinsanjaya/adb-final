@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ARTICLE, ADD_ARTICLE, LOADING_ARTICLE } from './types'
+import { GET_ARTICLE, ADD_ARTICLE, UPDATE_ARTICLE, LOADING_ARTICLE } from './types'
 
 export const getArticle = (id) => dispatch => {
   dispatch(setLoadingArticle());
@@ -14,3 +14,10 @@ export const setLoadingArticle = () => {
     type: LOADING_ARTICLE
   }
 }
+
+export const updateArticle = (id, newContent) => dispatch => {
+  axios.put(`/api/articles/${id}`, {
+    content: newContent
+  })
+}
+
