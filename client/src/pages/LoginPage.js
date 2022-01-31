@@ -48,7 +48,6 @@ class LoginPage extends Component {
     const uname = this.state.username
     const pw = this.state.password
     const user = {uname, pw}
-    console.log(user)
     this.props.login(user)
   }
 

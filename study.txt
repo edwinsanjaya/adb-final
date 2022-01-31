@@ -61,3 +61,8 @@ in react-router 6, element must use function component if you need params featur
 
 // React Auth
 trigger load user in App.js during render/mount -> call the load user function in componentDidMount()
+
+// Functional Component & Redux -> Check Article Detail
+useful for parameterized router
+componentDidMount => use useEffect instead, second argument [] to call when unmount only!
+mapStatetoProps => use useSelector (optional)
