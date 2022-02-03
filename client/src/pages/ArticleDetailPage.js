@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { getArticle } from '../actions/articleActions'
+import parse from 'html-react-parser'
 
 ArticleDetailPage.propTypes = {
   article: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     article: state.article
   }
@@ -22,8 +23,12 @@ function ArticleDetailPage(props) {
   }, [])
   return (
     <div>
-      this is article {params.id}
-      {JSON.stringify(props.article.content)}
+      <div>
+        ID: {JSON.stringify(props.article.article.id)}. {JSON.stringify(props.article.article.title)}
+      </div>
+      <div>
+        {parse(props.article.article.content ? props.article.article.content : '')}
+      </div>
     </div>
   );
 }

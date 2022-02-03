@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage';
 import store from './store'
 import './App.css';
 import { loadUser } from './actions/authActions';
+import ArticlePage from './pages/ArticlePage';
 
 class App extends Component {
   componentDidMount(){
@@ -29,8 +30,9 @@ class App extends Component {
               <Routes>
                 <Route exact path="/" element={<><div>This is home page</div></>} />
                 <Route exact path="/actor-list" element={<><ActorModal /><ActorList /></>} />
+                <Route exact path="/article" element={<ArticlePage/>} />
                 <Route exact path="/article/create" element={<TinyMceEditor defaultViewer/>} />
-                <Route exact path="/article/:id" element={<ArticleDetailPage />} />
+                <Route exact path="/article/:id/detail" element={<ArticleDetailPage />} />
                 <Route exact path="/article/:id/edit" element={<ArticleEditPage />} />
                 <Route exact path="/ruangan-rahasia/login" element={<LoginPage />} />
               </Routes>
