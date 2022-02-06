@@ -1,12 +1,14 @@
 import {
   GET_ARTICLE,
+  GET_ARTICLES,
   ADD_ARTICLE,
-  LOADING_ARTICLE
+  LOADING_ARTICLE,
 } from '../actions/types'
 
 const initialState = {
   content: 'Nothing',
   article: {},
+  articles: [],
   loading: false
 }
 
@@ -16,6 +18,12 @@ export default function (state = initialState, action){
       return {
         ...state,
         article: action.payload,
+        loading: false
+      }
+    case GET_ARTICLES:
+      return {
+        ...state,
+        articles: action.payload.articles,
         loading: false
       }
     case ADD_ARTICLE:

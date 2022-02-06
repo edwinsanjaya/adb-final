@@ -6,14 +6,15 @@ import { getArticle, updateArticle } from '../actions/articleActions'
 import TinyMceEditor from '../components/TinyMceEditor';
 import { useState } from 'react';
 import { Button } from 'reactstrap';
+import parse from 'html-react-parser'
 
 ArticleEditPage.propTypes = {
-  article : PropTypes.object.isRequired
+  article: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    article : state.article
+    article: state.article
   }
 }
 
@@ -24,25 +25,29 @@ function ArticleEditPage(props) {
     dispatch(getArticle(params.id))
   }, [])
 
-  const initialContent = props.article.article.content
+  const initialContent = props.article.article.content ?? ''
   const [newContent, setNewContent] = useState('')
-  
-  function handleEditorchange(content, editor){
+
+  function handleEditorChange(content, editor) {
     setNewContent(content.replace(/>\s</g, "><"))
   }
 
-  function submitArticleChanges(){
+  function submitArticleChanges() {
     dispatch(updateArticle(params.id, newContent))
   }
 
   return (
     <div>
       Article ID: {params.id}. Title: {props.article.article.title}
-      <TinyMceEditor initialValue={initialContent} onEditorChange={handleEditorchange}/>
+      <TinyMceEditor initialValue={initialContent} onEditorChange={handleEditorChange} />
       <Button onClick={submitArticleChanges}>Submit Edit</Button>
       <div>
-        Preview
-        {newContent ? newContent : initialContent}
+        <div>
+          Preview:
+        </div>
+        <div>
+          {parse(newContent ? newContent : initialContent)}
+        </div>
       </div>
     </div>
   );

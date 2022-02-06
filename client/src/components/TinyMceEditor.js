@@ -28,7 +28,7 @@ function TinyMceEditor(props) {
           onEditorChange={props.onEditorChange ? props.onEditorChange : defaultHandleEditorChange}
           init={{
             height: 500,
-            menubar: false,
+            menubar: true,
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
               'searchreplace visualblocks code fullscreen',
@@ -41,7 +41,6 @@ function TinyMceEditor(props) {
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
           }}
         />
-        <button>Set Content</button>
         <div>
           {props.defaultViewer && <div>{newContent}</div>}
         </div>

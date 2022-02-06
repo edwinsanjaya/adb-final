@@ -66,3 +66,6 @@ trigger load user in App.js during render/mount -> call the load user function i
 useful for parameterized router
 componentDidMount => use useEffect instead, second argument [] to call when unmount only!
 mapStatetoProps => use useSelector (optional)
+
+// Material UI for React Component
+npm install @mui/material @emotion/react @emotion/styled
