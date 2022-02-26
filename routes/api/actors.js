@@ -1,16 +1,16 @@
 const express = require('express')
 const router = express.Router();
-
 //Actor Model
 const Actor = require('../../models/Actor')
+const buildActorService = require('../../service/actorService')
+
+const actorService = buildActorService({ actorRepository: Actor })
 
 // @route   GET api/actors
 // @desc    Get all actors
 // @access  Public
 router.get('/', (req, res) => {
-  Actor.findAll({
-    order: [['actor_id', 'DESC']]
-  })
+  actorService.findAll()
     .then(actors => {
       res.json(actors)
     })
@@ -18,16 +18,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/filter', (req, res, next) => {
-  const filter = {}
-  if (req.body?.firstName) {
-    filter.firstName = req.body.firstName
-  }
-  if (req.body?.lastName) {
-    filter.lastName = req.body.lastName
-  }
-  Actor.findAll({
-    where: { ...filter }
-  })
+  actorService.findByFilter(req?.body)
     .then(actors => res.json(actors))
     .catch(err => next(err))
 })
@@ -36,7 +27,7 @@ router.post('/filter', (req, res, next) => {
 // @desc    Create an actor
 // @access  Public
 router.post('/', (req, res) => {
-  Actor.create({
+  actorService.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName
   })
@@ -50,28 +41,19 @@ router.post('/', (req, res) => {
 //@route DELETE api/actors/:id
 //@desc         Delete an actor by id
 //@access       Public
-router.delete('/:id', (req, res) => {
-  Actor.findByPk(req.params.id)
-    .then(actor => actor.destroy().then(() => res.json({ success: true })))
-    .catch(err => res.status(404).json({ success: false }))
+router.delete('/:id', (req, res, next) => {
+  actorService.deleteById(req.params.id)
+    .then(() => res.json({ success: true }))
+    .catch(err => next(err))
 })
 
-router.put('/:id', (req, res) => {
-  Actor.findByPk(req.params.id)
-    .then(actor => {
-      if (!actor) {
-        throw "actor not exist"
-      }
-      return actor
-    }).then(actor => actor.update({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
-    })).then(actor => res.json({
+router.put('/:id', (req, res, next) => {
+  actorService.update(req.params.id, req.body)
+    .then(actor => res.status(200).json({
       success: true,
-      actor: actor,
-      status: res.statusCode
+      actor: actor
     }))
-    .catch(err => res.status(404).json({ success: false }))
+    .catch(err => next(err))
 })
 
 
