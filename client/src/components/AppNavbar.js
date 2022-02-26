@@ -37,9 +37,7 @@ class AppNavbar extends Component {
     const isAuthenticated = this.props.auth.isAuthenticated
     return (
       <div>
-        {
-          isAuthenticated && 'Logged in as ' + this.props.auth.user.username
-        }
+        {isAuthenticated && <Container>'Logged in as ' + this.props.auth.user.username</Container>}
         <Navbar color="dark" dark expand="sm" container>
           <NavbarBrand href="/">Jellyfish Gaming</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -61,8 +59,8 @@ class AppNavbar extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://www.google.com/search?q=edwin+%26+wilson">
-                  Contact Us
+                <NavLink tag={Link} to="/about">
+                  About Us
                 </NavLink>
               </NavItem>
             </Nav>

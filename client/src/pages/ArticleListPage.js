@@ -13,6 +13,7 @@ import {
   Button
 } from '@mui/material';
 import { EditRounded, Visibility } from '@mui/icons-material'
+import './ArticleListPage.scss'
 
 function mapStateToProps(state) {
   return {
@@ -56,10 +57,10 @@ class ArticleListPage extends Component {
                     <TableCell>{(article.createdAt).substring(0, 10)}/{(article.updatedAt).substring(0, 10)}</TableCell>
                     <TableCell>
                       <Link to={"/article/" + article.id + "/detail"}>
-                        <Button variant="contained" startIcon={<Visibility />}> View </Button>
+                        <Button id="view-button" variant="contained" startIcon={<Visibility />}> View </Button>
                       </Link>
                       <Link to={"/article/" + article.id + "/edit"}>
-                        <Button variant="contained" startIcon={<EditRounded />}> Edit </Button>
+                        <Button id="edit-button" variant="contained" startIcon={<EditRounded />}> Edit </Button>
                       </Link>
                     </TableCell>
                   </TableRow>

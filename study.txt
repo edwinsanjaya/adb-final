@@ -68,4 +68,8 @@ componentDidMount => use useEffect instead, second argument [] to call when unmo
 mapStatetoProps => use useSelector (optional)
 
 // Material UI for React Component
-npm install @mui/material @emotion/react @emotion/styled
+- npm install @mui/material @emotion/react @emotion/styled
+- override theme: use ThemeProvider & create theme const in App.js
+
+//Hook
+useEffect: run every render/update (second param: []: only run once, [variable]: will run when variable changed)
