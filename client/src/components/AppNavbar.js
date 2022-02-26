@@ -37,7 +37,7 @@ class AppNavbar extends Component {
     const isAuthenticated = this.props.auth.isAuthenticated
     return (
       <div>
-        {isAuthenticated && <Container>'Logged in as ' + this.props.auth.user.username</Container>}
+        {isAuthenticated && <Container>{'Logged in as ' + this.props.auth.user.username}</Container>}
         <Navbar color="dark" dark expand="sm" container>
           <NavbarBrand href="/">Jellyfish Gaming</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
