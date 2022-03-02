@@ -5,6 +5,8 @@ import { connect, useDispatch } from 'react-redux';
 import { getArticle } from '../actions/articleActions'
 import parse from 'html-react-parser'
 
+import './ArticleDetailPage.scss';
+
 ArticleDetailPage.propTypes = {
   article: PropTypes.object.isRequired
 };
@@ -26,6 +28,7 @@ function ArticleDetailPage(props) {
       <div>
         ID: {JSON.stringify(props.article.article.id)}. {JSON.stringify(props.article.article.title)}
       </div>
+      <div className="title">{props.article.article.title}</div>
       <div>
         {parse(props.article.article.content ? props.article.article.content : '')}
       </div>

@@ -27,9 +27,10 @@ export const setLoadingArticle = () => {
   }
 }
 
-export const updateArticle = (id, newContent) => dispatch => {
+export const updateArticle = (id, article) => dispatch => {
   axios.put(`/api/articles/${id}`, {
-    content: newContent
+    title: article.title,
+    content: article.content,
   })
 }
 

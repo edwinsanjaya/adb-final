@@ -1,0 +1,42 @@
+$nameColor: blue;
+
+.authors-container{
+  display: flex;
+  flex-direction: column;
+  margin: 2em 10em 2em;
+}
+
+.author-container{
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 20px;
+  font-family: 'Zen Kaku Gothic New';
+
+  .author-name{
+    font-size: 24px;
+  }
+
+  .author-job{
+    font-size: 20px;
+  }
+
+  .author-interests{
+    display: flex;
+    flex-direction: row;
+
+    .author-interest{
+
+      
+
+      margin: 0.4em;
+      background-color: cadetblue;
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.3em 0.6em;
+
+      &:first-child{
+        margin-left: 0;
+      }
+    }
+  }
+}
